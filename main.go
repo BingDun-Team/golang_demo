@@ -22,11 +22,11 @@ func main() {
 	client := resty.New()
 
 	//接口信息
-	puzzleToken := "8bb72d21ee65e325c548da0e04bdd3eb"
+	puzzleToken := "your puzzle_token"
 	reviewApiUrl := "https://bingdun.apis.show/api/review?puzzle_token=" + puzzleToken
-	authID := "6e565a15d7da27b5d1c949357761a8e4"
-	authSecretKey := "912097369277ecb5dac3d1bd7ab00d2e"
-	timeAt := "1675750472"
+	authID := "your auth_id"
+	authSecretKey := "your auth_secret_key"
+	timeAt := time.Now().Unix()
 
 	//生成签名
 	sign := Sha256(puzzleToken + authID)
@@ -34,7 +34,7 @@ func main() {
 	responseData := &Response{}
 	response, requestErr := client.R().
 		SetHeader("Content-Type", "application/json").
-		SetBody(`{"auth_id":"` + authID + `", "auth_secret_key":"` + authSecretKey + `", "time_at":"` + timeAt + `", "sign":"` + sign + `"}`).
+		SetBody(map[string]interface{}{"auth_id": authID, "auth_secret_key": authSecretKey, "time_at": timeAt, "sign": sign}).
 		SetResult(responseData).
 		Post(reviewApiUrl)
 	if requestErr != nil {
