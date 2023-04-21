@@ -24,7 +24,8 @@ func main() {
 
 	//接口信息
 	puzzleToken := "your puzzle_token"
-	reviewApiUrl := "https://bingdun.apis.show/api/review?puzzle_token=" + puzzleToken
+	bingDunDomain := "https://bingdun.apis.cloud"
+	reviewApiUrl := bingDunDomain + "/api/review?puzzle_token=" + puzzleToken
 	authID := "your auth_id"
 	authSecretKey := "your auth_secret_key"
 	timeAt := time.Now().Unix()
